@@ -1,3 +1,5 @@
+@import"https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
+
 *{
 	margin: 0;
 	padding: 0;
@@ -5,7 +7,7 @@
 }
 	
 body{
-	background-image: url(../img/back1.jpg);
+	background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(../img/back2.jpg);
 	height: 100vh;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -13,43 +15,45 @@ body{
 }
 
 .container{
-	text-align: center;
 	position: absolute;
-	top: 50%;
+	top:50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-}
-
-form{
+	background-color: rgba(0,0,0,0.6);
+	border-bottom: 4px solid rgba(0,0,0,0.7);
+	border-right:  4px solid rgba(0,0,0,0.7);
 	height: 520px;
 	width: 400px;
-	background-color: rgba(0,0,0,0.7);
-	border-bottom: 3px solid rgba(0,0,0,0.8);
-	border-right: 3px solid rgba(0,0,0,0.8);
-	border-radius: 12px;
+	border-radius: 5px;
+}
+p{
+	color: #fff;
+}
+
+.main{
+	margin: 20px;
+	padding: 10px;
 }
 
 .main input{
-	border : none;
-	width: 350px;
-	height: 40px;
-	box-sizing: border-box;
-	padding: 10px 0 10px 22px;
-	margin: 40px 25px 0 25px;
-	border-bottom: 1px solid #000;
+	border:none;
 	background-color: transparent;
+	border-bottom: 1px solid  mediumseagreen ;
+	width: 300px;
+	margin: 5px 25px 3px 16px;
+	height: 30px;
+	margin-bottom: 18px;
+	padding: 4px;
+	
 }
 
 .main1 input{
+	width: 250px;
+	height: 46px;
+	margin-left: 75px;
+	margin-top: -40px;
+	background-color: mediumseagreen;
 	border:none;
-	color: #fff;
-	font-size: 18px;
-	border:none; 
-	width: 280px;
-	margin: 35px 60px;
-	padding:15px 0;
-	border-radius: 6px;
-	background-image: linear-gradient(120deg,darkblue,hotpink);
-	cursor: pointer;
+	border-radius: 4px;
+	font-size: 16px;
 }
-
