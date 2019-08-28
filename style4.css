@@ -10,13 +10,13 @@
 .content {
   position: relative;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }
 
 .border {
   width: 100%;
-  height: 100px;
+  height: 11vh;
   background-image: linear-gradient(to left, darkblue, purple, darkblue);
   opacity: 0.6;
   border-bottom: 0.5px solid
@@ -36,12 +36,14 @@ h1 {
 
 .list {
   position: relative;
-  align-items: centre;
-  right: -15%;
+  align-items: center;
+  right: -12%;
+
+
 }
 
 .list li {
-  justify-content: space-evenly;
+  justify-content: space-around;
   list-style: none;
   display: flex;
   width: 110px;
@@ -52,6 +54,7 @@ h1 {
   height: 45px;
   border-radius: 6px;
   transition: 0.4s;
+
 }
 
 .list li:hover {
@@ -87,4 +90,26 @@ h1 {
   height: 3px;
   margin-bottom: 2px;
   border-radius: 4px;
+}
+
+.dropdown{
+  position: absolute;
+  height: 85vh;
+  width: 400px;
+  top:11vh;
+  border:transparent;
+  background-color: #4f3969;
+  box-shadow: 4px 4px 10px #000;
+
+}
+
+.dropdown ul li{
+  color: #f4f4f4;
+  height: 28.3vh;
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-weight: bold;
 }
