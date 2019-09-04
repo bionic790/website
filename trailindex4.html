@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MAIN PAGE</title>
+    <link rel="stylesheet" type="text/css" href="css/trailstyle.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:500&display=swap"
+      rel="stylesheet"
+    />
+     <script type="text/JavaScript">
+      const navslide = () => {
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav_links');
+        const i=document.querySelector('.logo_add');
+        const pop=document.querySelector('.pop');
+        burger.addEventListener('click', () => {
+          nav.classList.toggle('nav_active');
+        });
+        i.addEventListener('click', () => {
+            pop.classList.toggle('pop_active');
+        });
+      }
+      navslide();
+    </script> 
+  </head>
+  <body>
+    <nav>
+      <i id="logo_add" class="fa fa-ellipsis-v" aria-hidden="true"></i>
+      <div class=".logo">
+        <h1>bmsce</h1>
+      </div>
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav_links">
+        <li><a href="#">home</a></li>
+        <li><a href="http://bmsce.in/">about</a></li>
+        <li><a href="#">campus</a></li>
+        <li><a href="#">contact</a></li>
+      </ul>
+    </nav>
+    <div class="pop">
+      <ul>
+        <li>add</li>
+        <li>check</li>
+      </ul>
+    </div>
+     <script type="text/JavaScript">
+           navslide();
+    </script> 
+  </body>
+</html>
