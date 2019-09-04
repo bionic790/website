@@ -3,36 +3,41 @@
   <head>
     <title>MAIN PAGE</title>
     <link rel="stylesheet" type="text/css" href="css/style4.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:500&display=swap"
+      rel="stylesheet"
+    />
     <script type="text/JavaScript">
 
+      const navslide = () => {
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav_links');
+
+        burger.addEventListener('click', () => {
+          nav.classList.toggle('nav_active');
+        });
+      }
+
+      navslide();
     </script>
   </head>
   <body>
-      <div class="border">
-        <div class="content">
-          <h1>bmsce</h1>
-          <div class="list">
-            <ul>
-              <a href="#"><li>contact</li></a>
-              <a href="#"><li>statistics</li></a>
-              <a href="#"><li>campus</li></a>
-              <a href="http://bmsce.in/"><li>about</li></a>
-              <a href="#"><li class="active">home</li></a>
-            </ul>
-          </div>
-        </div>
+    <nav>
+      <div class=".logo">
+        <h1>bmsce</h1>
       </div>
       <div class="burger">
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
       </div>
-      <div class="dropdown">
-        <ul>
-          <li>Add</li>
-          <li>Check</li>
-          <li>Remove</li>
-        </ul>
-      </div>   
+      <ul class="nav_links">
+        <li><a href="#">home</a></li>
+        <li><a href="http://bmsce.in/">about</a></li>
+        <li><a href="#">campus</a></li>
+        <li><a href="#">contact</a></li>
+      </ul>
+    </nav>
   </body>
 </html>
+
