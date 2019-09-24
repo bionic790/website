@@ -7,22 +7,26 @@
       href="https://fonts.googleapis.com/css?family=Poppins:500&display=swap"
       rel="stylesheet"
     />
-    <script type="text/JavaScript">
-
+     <script type="text/JavaScript">
       const navslide = () => {
         const burger = document.querySelector('.burger');
         const nav = document.querySelector('.nav_links');
-
+        const event=document.querySelector('.event');
+        const pop=document.querySelector('.pop');
         burger.addEventListener('click', () => {
           nav.classList.toggle('nav_active');
+          body.style.background="rgba(0,0,0,0.7)";
+        });
+        event.addEventListener('click', () => {
+            pop.classList.toggle('nav_active');
         });
       }
-
-      navslide();
-    </script>
+      
+    </script> 
   </head>
   <body>
     <nav>
+    	<div class="event"><i  class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
       <div class=".logo">
         <h1>bmsce</h1>
       </div>
@@ -32,12 +36,24 @@
         <div class="line3"></div>
       </div>
       <ul class="nav_links">
-        <li><a href="#">home</a></li>
-        <li><a href="http://bmsce.in/">about</a></li>
-        <li><a href="#">campus</a></li>
-        <li><a href="#">contact</a></li>
+        <li><a class="li1" href="#">home</a></li>
+        <li><a  class="li2"href="http://bmsce.in/">about</a></li>
+        <li><a class="li3"href="#">campus</a></li>
+        <li><a class="li4"href="#">contact</a></li>
       </ul>
     </nav>
+    
+      <ul class="pop">
+        <li>add</li>
+        <li>check</li>
+      </ul>
+      <div class="add_container">
+      <input type="text" class="add" placeholder="add"/>
+      <div class="event1"><i class="fa fa-plus" aria-hidden="true"></i></div>
+      </div>
+     <script type="text/JavaScript">
+           navslide();
+    </script> 
   </body>
 </html>
 
