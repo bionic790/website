@@ -9,51 +9,198 @@
     />
      <script type="text/JavaScript">
       const navslide = () => {
+
         const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav_links');
         const event=document.querySelector('.event');
-        const pop=document.querySelector('.pop');
+        const en=document.querySelector('.en');     
+        const clear = document.querySelector(".clear");
+        const list = document.getElementById("list");
+        const input = document.getElementById("input");
+        const menu_remove = document.querySelector('.menu_remove');
+
+        const CHECK = "fa-check-circle";
+        const UNCHECK = "fa-circle-thin";
+        const LINE_THROUGH = "lineThrough";
+
         burger.addEventListener('click', () => {
-          nav.classList.toggle('nav_active');
-          body.style.background="rgba(0,0,0,0.7)";
+           const nav = document.querySelector('.nav_links');
+          nav.classList.toggle('active');
         });
+
         event.addEventListener('click', () => {
-            pop.classList.toggle('nav_active');
+           const pop=document.querySelector('.pop');
+            pop.classList.toggle('active');
         });
+
+        en.addEventListener('click', ()=>{
+           const pop=document.querySelector('.pop');
+           const menu=document.querySelector('.menu');
+            pop.classList.toggle('active');
+            menu.classList.toggle('active');
+        });
+
+        menu_remove.addEventListener('click', () => {
+           const menu=document.querySelector('.menu');
+           menu.classList.toggle('active');
+        });
+
+    let LIST, id;
+
+    let data = localStorage.getItem("TODO");
+
+
+    if(data){
+        LIST = JSON.parse(data);
+        id = LIST.length; 
+        loadList(LIST); 
+    }else{
+        
+        LIST = [];
+        id = 0;
+    }
+
+
+    function loadList(array){
+        array.forEach(function(item){
+            addToDo(item.name, item.id, item.done, item.trash);
+        });
+    }
+
+
+    clear.addEventListener("click", function(){
+        localStorage.clear();
+        location.reload();
+    });
+
+    function addToDo(toDo, id, done, trash){
+        
+        if(trash){ return; }
+        
+        const DONE = done ? CHECK : UNCHECK;
+        const LINE = done ? LINE_THROUGH : "";
+        
+        const item = `<li class="item">
+                        <i class="fa ${DONE} co" job="complete" id="${id}"></i>
+                        <p class="text ${LINE}">${toDo}</p>
+                        <i class="fa fa-trash-o de" job="delete" id="${id}"></i>
+                      </li>
+                    `;
+        
+        const position = "beforeend";
+        
+        list.insertAdjacentHTML(position, item);
+    }
+
+    document.addEventListener("keyup",function(event){
+        if(event.keyCode == 13){
+            const toDo = input.value;
+            
+           
+            if(toDo){
+                addToDo(toDo, id, false, false);
+                
+                LIST.push({
+                    name : toDo,
+                    id : id,
+                    done : false,
+                    trash : false
+                });
+                
+                localStorage.setItem("TODO", JSON.stringify(LIST));
+                
+                id++;
+            }
+            input.value = "";
+        }
+    });
+
+    function completeToDo(element){
+        element.classList.toggle(CHECK);
+        element.classList.toggle(UNCHECK);
+        element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
+        
+        LIST[element.id].done = LIST[element.id].done ? false : true;
+    }
+
+    
+    function removeToDo(element){
+        element.parentNode.parentNode.removeChild(element.parentNode);
+        
+        LIST[element.id].trash = true;
+    }
+
+
+    list.addEventListener("click", function(event){
+        const element = event.target; 
+        const elementJob = element.attributes.job.value; 
+        
+        if(elementJob == "complete"){
+            completeToDo(element);
+        }else if(elementJob == "delete"){
+            removeToDo(element);
+        }
+        
+        localStorage.setItem("TODO", JSON.stringify(LIST));
+    });
+
       }
       
     </script> 
   </head>
   <body>
     <nav>
+
     	<div class="event"><i  class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
+
       <div class=".logo">
-        <h1>bmsce</h1>
+        <h1>BMSCE</h1>
       </div>
+
       <div class="burger">
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
       </div>
+
       <ul class="nav_links">
-        <li><a class="li1" href="#">home</a></li>
-        <li><a  class="li2"href="http://bmsce.in/">about</a></li>
-        <li><a class="li3"href="#">campus</a></li>
-        <li><a class="li4"href="#">contact</a></li>
+        <li><a class="li1" href="#">HOME</a></li>
+        <li><a  class="li2"href="http://bmsce.in/">ABOUT</a></li>
+        <li><a class="li3"href="#">CAMPUS</a></li>
+        <li><a class="li4"href="#">CONTACT</a></li>
       </ul>
+
     </nav>
     
       <ul class="pop">
-        <li>add</li>
-        <li>check</li>
+        <li ><button class="en">ADD</button>
+        </li>
+        <li><button  class="view">CHECK</button></li>
       </ul>
-      <div class="add_container">
-      <input type="text" class="add" placeholder="add"/>
-      <div class="event1"><i class="fa fa-plus" aria-hidden="true"></i></div>
+
+      <div class="menu">
+        
+        <div class="header">
+          <p>Events</p>
+          <div class="clear">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+          </div>
+          <div class="menu_remove">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="contect">
+          <div class="list_div"><ul id="list"></ul></div>
+          <div class="add_item">
+              <input type="text" id="input" placeholder="Add"/>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+          </div>
+        </div>
       </div>
      <script type="text/JavaScript">
            navslide();
     </script> 
   </body>
 </html>
+
 
