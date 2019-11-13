@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>main page</title>
+	<link rel="stylesheet" type="text/css" href="css/newmain.css">
+	<script type="text/javascript">
+		const block = () => {
+
+			const burger = document.querySelector('.burger');
+			const sem = document.querySelector('.sem');
+			const even = document.querySelector('.even');
+			const odd = document.querySelector('.odd');
+			const semex = document.querySelector('.semex');
+			const evenex = document.querySelector('.evenex');
+			const oddex = document.querySelector('.oddex');
+			const note = document.querySelector('.note');
+			const menu = document.querySelector('.menu');
+			const navlist = document.querySelector('.navlist');
+			const clear = document.querySelector(".clear");
+	        const list = document.getElementById("list");
+	        const input = document.getElementById("input");
+	        const inputevenfolder = document.getElementById("inputevenfolder");
+	        const inputoddfolder = document.getElementById("inputoddfolder");
+	        const menu_remove = document.querySelector('.menu_remove');
+	        const add = document.querySelector('.add');
+	        const elist = document.querySelector('.elist');
+	        const olist = document.querySelector('.olist');
+	        const einsert = document.querySelector('.einsert');
+	        const oinsert = document.querySelector('.oinsert');
+	        const eadd = document.querySelector('.eadd');
+	        const oadd = document.querySelector('.oadd');
+	        const efinal = document.querySelector('.efinal');
+	        const ofinal = document.querySelector('.ofinal');
+
+			burger.addEventListener('click',() =>{
+				navlist.classList.toggle('active');
+				semex.classList.remove('active');
+				evenex.classList.remove('active');
+				oddex.classList.remove('active');
+			});
+			
+			sem.addEventListener('click', () =>{
+				semex.classList.toggle('active');
+				evenex.classList.remove('active');
+				oddex.classList.remove('active');
+			});
+
+			even.addEventListener('click', () =>{
+				evenex.classList.toggle('active');
+				oddex.classList.remove('active');
+			});
+
+			odd.addEventListener('click', () =>{
+				oddex.classList.toggle('active');
+				evenex.classList.remove('active');
+			});
+
+			note.addEventListener('click',() => {
+				navlist.classList.toggle('active');
+				menu.classList.add('active');
+				navlist.classList.remove('active');
+				semex.classList.remove('active');
+				evenex.classList.remove('active');
+				oddex.classList.remove('active');
+			});
+
+			menu_remove.addEventListener('click', () => {
+          	 	const menu=document.querySelector('.menu');
+           		menu.classList.remove('active');
+       		 });
+
+			einsert.addEventListener('click', () => {
+				eadd.classList.toggle('active');
+				evenex.classList.remove('active');
+			});
+
+			oinsert.addEventListener('click', () => {
+				oadd.classList.toggle('active');
+				oddex.classList.remove('active');
+			});
+
+			efinal.addEventListener('click', () => {
+				eadd.classList.toggle('active');
+				evenex.classList.add('active');
+			});
+
+			ofinal.addEventListener('click', () => {
+				oadd.classList.toggle('active');
+				oddex.classList.add('active');
+			});
+
+        const CHECK = "fa-check-circle";
+        const UNCHECK = "fa-circle-thin";
+        const LINE_THROUGH = "lineThrough";
+
+        let LIST, id;
+
+	    let data = localStorage.getItem("TODO");
+
+	    if(data){
+	        LIST = JSON.parse(data);
+	        id = LIST.length; 
+	        loadList(LIST); 
+	    }else{
+	        
+	        LIST = [];
+	        id = 0;
+	    }
+
+	    function loadList(array){
+	        array.forEach(function(item){
+	            addToDo(item.name, item.id, item.done, item.trash);
+	        });
+	    }
+
+	    clear.addEventListener("click", function(){
+	        localStorage.clear();
+	        location.reload();
+	    });
+
+	    function addToDo(toDo, id, done, trash){
+	        
+	        if(trash){ return; }
+	        
+	        const DONE = done ? CHECK : UNCHECK;
+	        const LINE = done ? LINE_THROUGH : "";
+	        
+	        const item = `<li class="item">
+	                        <i class="fa ${DONE} co" job="complete" id="${id}"></i>
+	                        <p class="text ${LINE}">${toDo}</p>
+	                        <i class="fa fa-trash-o de" job="delete" id="${id}"></i>
+	                      </li>
+	                    `;
+	        
+	        const position = "beforeend";
+	        
+	        list.insertAdjacentHTML(position, item);
+	    }
+
+	    document.addEventListener("keyup",function(event){
+	        if(event.keyCode == 13){
+	            const toDo = input.value;
+	            entry(toDo);
+	           }
+	    });
+
+	    add.addEventListener('click',()=>{
+	      const toDo = input.value;
+	      entry(toDo);
+	    });
+	           
+	    const entry = (toDo) =>{
+	      if(toDo){
+	        addToDo(toDo, id, false, false);
+	                
+	        LIST.push({
+	                   name : toDo,
+	                    id : id,
+	                    done : false,
+	                    trash : false
+	                });
+	                
+	        localStorage.setItem("TODO", JSON.stringify(LIST));
+	                
+	        id++;
+	      }
+	           
+	       input.value = "";
+	    }
+	       
+
+	    function completeToDo(element){
+	        element.classList.toggle(CHECK);
+	        element.classList.toggle(UNCHECK);
+	        element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
+	        
+	        LIST[element.id].done = LIST[element.id].done ? false : true;
+	    }
+
+	    
+	    function removeToDo(element){
+	        element.parentNode.parentNode.removeChild(element.parentNode);
+	        
+	        LIST[element.id].trash = true;
+	    }
+
+
+	    list.addEventListener("click", function(event){
+	        const element = event.target; 
+	        const elementJob = element.attributes.job.value; 
+	        
+	        if(elementJob == "complete"){
+	            completeToDo(element);
+	        }else if(elementJob == "delete"){
+	            removeToDo(element);
+	        }
+	        
+	        localStorage.setItem("TODO", JSON.stringify(LIST));
+	    });
+
+	    // ***********************************************//////
+
+	    let LIST2, id2;
+
+	    let data2 = localStorage.getItem("seminfo");
+
+	    if(data2){
+	        LIST2 = JSON.parse(data);
+	        id2 = LIST2.length; 
+	        loadList(LIST2); 
+	    }else{
+	        
+	        LIST2 = [];
+	        id2 = 0;
+	    }
+
+	    function loadList(array){
+	        array.forEach(function(item){
+	            addToDo(item.name, item.id2, item.trash);
+	        });
+	    }
+
+	    function addToDo(toDo, id2, trash){
+	        
+	        if(trash){ return; }
+	        
+	        const item = `<li>
+	    					<p class="text">${name}</p>
+	    					 <i class="fa fa-trash-o de" job="remove" id="${id2}"></i>
+	    				</li>`;
+	        
+	        const position = "afterbegin";
+	        
+	        elist.insertAdjacentHTML(position, item);
+	    }
+
+	    document.addEventListener("keyup",function(event){
+	        if(event.keyCode == 13){
+	            const foldername = inputevenfolder.value;
+	            entryfolder(foldername);
+	           }
+	    });
+
+	    efinal.addEventListener('click',()=>{
+	      const foldername = inputevenfolder.value;
+	      entryfolder(foldername);
+	    });
+	           
+	    const entryfolder = (foldername) =>{
+	      if(foldername){
+	        addfolder(foldername, id2, false);
+	                
+	        LIST2.push({
+	                   name : foldername,
+	                    id2 : id2,
+	                    trash : false
+	                });
+	                
+	        localStorage.setItem("seminfo", JSON.stringify(LIST2));
+	                
+	        id++;
+	      }
+	           
+	       inputevenfolder.value = "";
+	    }
+	       
+	    function removefolder(element2){
+	        element2.parentNode.parentNode.removeChild(element2.parentNode);
+	        
+	        LIST2[element2.id2].trash = true;
+	    }
+
+
+	    list.addEventListener("click", function(event){
+	        const element2 = event.target; 
+	        const elementJob = element2.attributes.job.value; 
+	        
+	        if(elementJob == "remove"){
+	            removefolder(element2);
+	        }
+	        
+	        localStorage.setItem("seminfo", JSON.stringify(LIST2));
+	    });
+
+	}
+	</script>
+</head>
+<body>
+	<div class="audit"><span>Academic Audit</span></div>
+	<div class="branch"><span>CSE</span></div>
+	<nav>
+		<div class="burger">
+			<div class="line1"></div>
+			<div class="line2"></div>
+			<div class="line3"></div>
+		</div>
+		<div class="bms">
+			<span>BMSCE</span>
+		</div>
+		<div class="profile">
+			<img src="img/studentuser.png">
+		</div>
+	</nav>
+	<div class="navlist">
+		<div class="sem" ><span>Semister</span></div>
+		<div class="note"><span>Note</span></div>
+	</div>
+	<div class="semex">
+		<div class="even">
+			<span>Even Sem</span>
+		</div>
+		<div class="odd">
+			<span>Odd Sem</span>
+		</div>
+	</div>
+	<div class="evenex">
+		<ul class="elist l"><div class="einsert"><p>+</p><div></ul>
+	</div>
+	<div class="oddex">
+		<ul class="olist l"><div class="oinsert"><p>+</p></div></ul>
+	</div>
+
+		<div class="eadd">
+				<input type="text" id="inputevenfolder" name="folder" placeholder="Add folder..." autocomplete="off">
+				<p class="efinal">+</p>				
+		</div>
+		<div class="oadd">
+				<input type="text" name="folder" id="inputoddfolder" placeholder="Add folder..." autocomplete="off">
+				<p class="ofinal">+</p>				
+		</div>
+
+	 <div class="menu">
+        
+        <div class="header">
+          <p>Events</p>
+          <div class="clear">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+          </div>
+          <div class="menu_remove">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="contect">
+          <div class="list_div"><ul id="list"></ul></div>
+          <div class="add_item">
+              <input type="text" id="input" placeholder="Add"/>
+              <div class="add" job="add"><i class="fa fa-plus"  aria-hidden="true"></i></div>
+          </div>
+        </div>
+
+      </div>
+
+	<script type="text/javascript">
+		block();
+	</script>
+</body>
+</html>
