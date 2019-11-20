@@ -31,12 +31,24 @@
 	        const oadd = document.querySelector('.oadd');
 	        const efinal = document.querySelector('.efinal');
 	        const ofinal = document.querySelector('.ofinal');
+	        const logout = document.querySelector('.logout');
+	        const profile = document.querySelector('.profile');
+
+	        profile.addEventListener('click', () => {
+	        	logout.classList.toggle('active');
+	        	navlist.classList.remove('active');
+				semex.classList.remove('active');
+				evenex.classList.remove('active');
+				oddex.classList.remove('active');
+
+	        });
 
 			burger.addEventListener('click',() =>{
 				navlist.classList.toggle('active');
 				semex.classList.remove('active');
 				evenex.classList.remove('active');
 				oddex.classList.remove('active');
+				logout.classList.remove('active');
 			});
 			
 			sem.addEventListener('click', () =>{
@@ -200,87 +212,87 @@
 
 	    // ***********************************************//////
 
-	    let LIST2, id2;
+	    // let LIST2, id2;
 
-	    let data2 = localStorage.getItem("seminfo");
+	    // let data2 = localStorage.getItem("seminfo");
 
-	    if(data2){
-	        LIST2 = JSON.parse(data);
-	        id2 = LIST2.length; 
-	        loadList(LIST2); 
-	    }else{
+	    // if(data2){
+	    //     LIST2 = JSON.parse(data);
+	    //     id2 = LIST2.length; 
+	    //     loadList(LIST2); 
+	    // }else{
 	        
-	        LIST2 = [];
-	        id2 = 0;
-	    }
+	    //     LIST2 = [];
+	    //     id2 = 0;
+	    // }
 
-	    function loadList(array){
-	        array.forEach(function(item){
-	            addToDo(item.name, item.id2, item.trash);
-	        });
-	    }
+	    // function loadList(array){
+	    //     array.forEach(function(item){
+	    //         addToDo(item.name, item.id2, item.trash);
+	    //     });
+	    // }
 
-	    function addToDo(toDo, id2, trash){
+	    // function addToDo(toDo, id2, trash){
 	        
-	        if(trash){ return; }
+	    //     if(trash){ return; }
 	        
-	        const item = `<li>
-	    					<p class="text">${name}</p>
-	    					 <i class="fa fa-trash-o de" job="remove" id="${id2}"></i>
-	    				</li>`;
+	    //     const item = `<li>
+	    // 					<p class="text">${name}</p>
+	    // 					 <i class="fa fa-trash-o de" job="remove" id="${id2}"></i>
+	    // 				</li>`;
 	        
-	        const position = "afterbegin";
+	    //     const position = "afterbegin";
 	        
-	        elist.insertAdjacentHTML(position, item);
-	    }
+	    //     elist.insertAdjacentHTML(position, item);
+	    // }
 
-	    document.addEventListener("keyup",function(event){
-	        if(event.keyCode == 13){
-	            const foldername = inputevenfolder.value;
-	            entryfolder(foldername);
-	           }
-	    });
+	    // document.addEventListener("keyup",function(event){
+	    //     if(event.keyCode == 13){
+	    //         const foldername = inputevenfolder.value;
+	    //         entryfolder(foldername);
+	    //        }
+	    // });
 
-	    efinal.addEventListener('click',()=>{
-	      const foldername = inputevenfolder.value;
-	      entryfolder(foldername);
-	    });
+	    // efinal.addEventListener('click',()=>{
+	    //   const foldername = inputevenfolder.value;
+	    //   entryfolder(foldername);
+	    // });
 	           
-	    const entryfolder = (foldername) =>{
-	      if(foldername){
-	        addfolder(foldername, id2, false);
+	    // const entryfolder = (foldername) =>{
+	    //   if(foldername){
+	    //     addfolder(foldername, id2, false);
 	                
-	        LIST2.push({
-	                   name : foldername,
-	                    id2 : id2,
-	                    trash : false
-	                });
+	    //     LIST2.push({
+	    //                name : foldername,
+	    //                 id2 : id2,
+	    //                 trash : false
+	    //             });
 	                
-	        localStorage.setItem("seminfo", JSON.stringify(LIST2));
+	    //     localStorage.setItem("seminfo", JSON.stringify(LIST2));
 	                
-	        id++;
-	      }
+	    //     id++;
+	    //   }
 	           
-	       inputevenfolder.value = "";
-	    }
+	    //    inputevenfolder.value = "";
+	    // }
 	       
-	    function removefolder(element2){
-	        element2.parentNode.parentNode.removeChild(element2.parentNode);
+	    // function removefolder(element2){
+	    //     element2.parentNode.parentNode.removeChild(element2.parentNode);
 	        
-	        LIST2[element2.id2].trash = true;
-	    }
+	    //     LIST2[element2.id2].trash = true;
+	    // }
 
 
-	    list.addEventListener("click", function(event){
-	        const element2 = event.target; 
-	        const elementJob = element2.attributes.job.value; 
+	    // list.addEventListener("click", function(event){
+	    //     const element2 = event.target; 
+	    //     const elementJob = element2.attributes.job.value; 
 	        
-	        if(elementJob == "remove"){
-	            removefolder(element2);
-	        }
+	    //     if(elementJob == "remove"){
+	    //         removefolder(element2);
+	    //     }
 	        
-	        localStorage.setItem("seminfo", JSON.stringify(LIST2));
-	    });
+	    //     localStorage.setItem("seminfo", JSON.stringify(LIST2));
+	    // });
 
 	}
 	</script>
@@ -301,6 +313,10 @@
 			<img src="img/studentuser.png">
 		</div>
 	</nav>
+	<div class="logout">
+		<span>Revanth nm</span>
+		<a href="logout.php"><p>logout</p></a>
+	</div>
 	<div class="navlist">
 		<div class="sem" ><span>Semister</span></div>
 		<div class="note"><span>Note</span></div>
